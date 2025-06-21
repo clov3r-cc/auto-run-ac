@@ -4,3 +4,5 @@ pnpm = "latest"
 
 [env]
 _.path = ['./node_modules/.bin']
+_.file = ".env"
+CLOUDFLARE_DATABASE_ID = "95084f46-59b0-441c-9300-33651a2bf018"

@@ -1,7 +1,7 @@
 {
   "extends": "./tsconfig.json",
-  // for vite.config.ts only
-  "include": ["vite.config.ts"],
+  // for vite.config.ts and drizzle.config.ts only
+  "include": ["vite.config.ts", "drizzle.config.ts"],
   "compilerOptions": {
     "composite": true,
     "strict": true,

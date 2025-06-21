@@ -6,10 +6,18 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "auto-run-ac",
   "compatibility_date": "2025-06-15",
+  "compatibility_flags": ["nodejs_compat"],
   "main": "./workers/app.ts",
   "vars": {
     "VALUE_FROM_CLOUDFLARE": "Hello from Cloudflare",
   },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "auto-run-ac",
+      "database_id": "95084f46-59b0-441c-9300-33651a2bf018",
+    },
+  ],
   "observability": {
     "enabled": true,
   },
