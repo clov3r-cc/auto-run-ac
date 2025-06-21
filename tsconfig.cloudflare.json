@@ -25,6 +25,7 @@
     },
     "esModuleInterop": true,
     "resolveJsonModule": true,
-    "allowImportingTsExtensions": true
+    "allowImportingTsExtensions": true,
+    "tsBuildInfoFile": "node_modules/.tmp/tsconfig.cloudflare.tsbuildinfo"
   }
 }
