@@ -11,7 +11,7 @@
     "dev": "react-router dev",
     "build": "react-router build",
     "deploy": "pnpm run build && wrangler deploy",
-    "db:gen": "drizzle-kit generate",
+    "db:gen": "drizzle-kit generate --config drizzle.prod.config.ts",
     "db-studio:prod": "drizzle-kit studio --config drizzle.prod.config.ts",
     "db-studio:dev": "drizzle-kit studio --config drizzle.dev.config.ts",
     "db:migrate:prod": "drizzle-kit migrate --config drizzle.prod.config.ts",
