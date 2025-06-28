@@ -9,13 +9,17 @@
   "compatibility_flags": ["nodejs_compat"],
   "main": "./workers/app.ts",
   "vars": {
-    "VALUE_FROM_CLOUDFLARE": "Hello from Cloudflare",
+    "METER_DEVICE_ID": "DC49091D8404",
+    "AIR_CONDITIONER_DEVICE_ID": "02-202306140644-28427602",
+    "MAXIMUM_ACCEPTABLE_TEMPERATURE": 28,
+    "MINIMUM_ACCEPTABLE_TEMPERATURE": 20,
+    "DEFAULT_ARRIVED_HOME__HOUR": 20,
+    "DEFAULT_ARRIVED_HOME__MINUTE": 0,
   },
-  "d1_databases": [
+  "kv_namespaces": [
     {
-      "binding": "DB",
-      "database_name": "auto-run-ac",
-      "database_id": "95084f46-59b0-441c-9300-33651a2bf018",
+      "binding": "KV",
+      "id": "2622aa221d65472ca1b9595c31a388cf",
     },
   ],
   "observability": {
