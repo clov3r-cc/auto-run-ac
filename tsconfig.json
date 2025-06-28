@@ -10,7 +10,7 @@
     "skipLibCheck": true,
     "strict": true,
     "noEmit": true,
-    "types": ["./worker-configuration.d.ts"],
+    "types": ["node", "./worker-configuration.d.ts"],
     // shadcn/ui cannot read baseUrl and paths from tsconfig.cloudflare.json
     "baseUrl": ".",
     "paths": {
