@@ -102,6 +102,10 @@ const importConfig = {
         varsIgnorePattern: '^_',
       },
     ],
+    'no-restricted-imports': [
+      'error',
+      { name: 'zod', message: 'Use zod/v4 instead.' },
+    ],
   },
 };
 
