@@ -1,0 +1,4 @@
+# This file is used to set environment variables for application.
+SWITCHBOT_TOKEN=
+SWITCHBOT_CLIENT_SECRET=
+NOTIFICATION_WEBHOOK_URL=
