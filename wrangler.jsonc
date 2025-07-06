@@ -17,9 +17,15 @@
     "DEFAULT_ARRIVED_HOME__MINUTE": 0,
   },
   "kv_namespaces": [
+    // auto-run-ac-HISTORY
     {
-      "binding": "KV",
+      "binding": "KV__HISTORY",
       "id": "2622aa221d65472ca1b9595c31a388cf",
+    },
+    // auto-run-ac-SCHEDULES
+    {
+      "binding": "KV__SCHEDULES",
+      "id": "de21ca8ba3004332bc002b04b9204d9e",
     },
   ],
   "observability": {
