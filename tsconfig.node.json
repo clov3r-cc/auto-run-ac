@@ -1,11 +1,15 @@
 {
   "extends": "./tsconfig.json",
-  // for vite.config.ts and drizzle.config.ts only
-  "include": ["vite.config.ts", "drizzle.*.config.ts"],
+  // for these files only
+  "include": ["vite.config.ts", "vitest.config.ts"],
   "compilerOptions": {
     "composite": true,
     "strict": true,
-    "types": ["node"],
+    "types": [
+      "node",
+      "./worker-configuration.d.ts",
+      "@cloudflare/vitest-pool-workers"
+    ],
     "lib": ["ES2022"],
     "target": "ES2022",
     "module": "ES2022",

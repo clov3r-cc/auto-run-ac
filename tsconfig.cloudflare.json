@@ -8,6 +8,7 @@
     "app/**/.client/**/*",
     "workers/**/*",
     "worker-configuration.d.ts",
+    "worker-configuration.test.d.ts",
     "lib/**/*"
   ],
   "compilerOptions": {
@@ -20,7 +21,11 @@
     "moduleResolution": "bundler",
     "jsx": "react-jsx",
     "baseUrl": ".",
-    "rootDirs": [".", "./.react-router/types"],
+    "rootDirs": [
+      ".",
+      "./.react-router/types",
+      "@cloudflare/vitest-pool-workers"
+    ],
     "paths": {
       "~/*": ["./app/*"]
     },

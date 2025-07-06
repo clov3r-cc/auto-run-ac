@@ -15,6 +15,7 @@
     "preinstall": "npx -y only-allow pnpm; pnpm dlx typesync || :",
     "postinstall": "pnpm run cf-typegen",
     "preview": "pnpm run build && vite preview",
+    "test": "vitest run",
     "typecheck": "pnpm run cf-typegen && react-router typegen && tsc -b"
   },
   "dependencies": {
@@ -35,6 +36,7 @@
   },
   "devDependencies": {
     "@cloudflare/vite-plugin": "^1.7.4",
+    "@cloudflare/vitest-pool-workers": "^0.8.49",
     "@eslint/js": "^9.30.0",
     "@libsql/client": "^0.15.9",
     "@react-router/dev": "^7.6.3",
@@ -62,6 +64,7 @@
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.34.1",
     "vite-tsconfig-paths": "^5.1.4",
+    "vitest": "^3.2.4",
     "wrangler": "^4.22.0"
   }
 }

@@ -10,7 +10,11 @@
     "skipLibCheck": true,
     "strict": true,
     "noEmit": true,
-    "types": ["node", "./worker-configuration.d.ts"],
+    "types": [
+      "node",
+      "./worker-configuration.d.ts",
+      "@cloudflare/vitest-pool-workers"
+    ],
     // shadcn/ui cannot read baseUrl and paths from tsconfig.cloudflare.json
     "baseUrl": ".",
     "paths": {
