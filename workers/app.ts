@@ -1,4 +1,5 @@
 import { createRequestHandler } from 'react-router';
+import { scheduledWorker } from './scheduled.ts';
 
 declare module 'react-router' {
   export interface AppLoadContext {
@@ -21,10 +22,10 @@ const fetch: ExportedHandlerFetchHandler<Env> = async (request, env, ctx) =>
 
 const scheduled: ExportedHandlerScheduledHandler<Env> = async (
   _controller,
-  _env,
+  env,
   _ctx,
 ) => {
-  // TODO: Handle scheduled events if needed
+  await scheduledWorker(env);
 };
 
 export default {
