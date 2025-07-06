@@ -25,6 +25,13 @@ interface TemperatureConfig {
   maximum: number;
 }
 
+/**
+ * 現在の温度と設定された温度範囲に基づいて、温度調整が必要かどうかを判定し、目標温度を計算する。
+ *
+ * @param actualTemp - 現在の実際の温度
+ * @param config - 温度の最小値と最大値
+ * @returns 加熱が必要な場合は最小温度、冷却が必要な場合は最大温度、調整不要の場合は undefined
+ */
 const calculateTempThreshold = (
   actualTemp: number,
   config: TemperatureConfig,
@@ -33,12 +40,19 @@ const calculateTempThreshold = (
   const shouldCool = config.maximum < actualTemp;
 
   if (!shouldWarm && !shouldCool) {
-    return null;
+    return undefined;
   }
 
   return shouldWarm ? config.minimum : config.maximum;
 };
 
+/**
+ * 指定されたスケジュールに基づいて、帰宅時刻を計算する。
+ *
+ * @param jstNow - 現在の日時（JST）
+ * @param schedule - 帰宅時刻情報を含むスケジュール設定
+ * @returns スケジュールで指定された「帰宅時刻」
+ */
 const calculateArrivalTime = (jstNow: TZDate, schedule: ScheduleConfig) =>
   new TZDate(
     jstNow.getFullYear(),
@@ -48,6 +62,13 @@ const calculateArrivalTime = (jstNow: TZDate, schedule: ScheduleConfig) =>
     schedule.arrivedHome.minute,
   );
 
+/**
+ * 到着時刻と温度差から、最適な開始時刻を計算する。
+ *
+ * @param arrivalTime - 帰宅予定時刻
+ * @param tempDiff - 現在の温度と目標温度の差
+ * @returns 最適な開始時刻
+ */
 const calculateOptimalStartTime = (arrivalTime: TZDate, tempDiff: number) => {
   const requiredHours = Math.ceil(tempDiff / TEMP_CHANGE_SPEED_PER_ONE_HOUR);
 
