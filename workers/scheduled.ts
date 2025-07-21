@@ -53,8 +53,16 @@ const calculateTempThreshold = (
  * @param schedule - 帰宅時刻情報を含むスケジュール設定
  * @returns スケジュールで指定された「帰宅時刻」
  */
-const calculateArrivalTime = (jstNow: TZDate, schedule: ScheduleConfig) =>
-  jstDate(
+const calculateArrivalTime = (jstNow: TZDate, schedule: ScheduleConfig) => {
+  console.log(
+    jstNow.getFullYear(),
+    jstNow.getMonth(),
+    jstNow.getDate(),
+    schedule.arrivedHome.hour,
+    schedule.arrivedHome.minute,
+  );
+
+  return jstDate(
     new Date(
       jstNow.getFullYear(),
       jstNow.getMonth(),
@@ -63,6 +71,7 @@ const calculateArrivalTime = (jstNow: TZDate, schedule: ScheduleConfig) =>
       schedule.arrivedHome.minute,
     ),
   );
+};
 
 /**
  * 到着時刻と温度差から、最適な開始時刻を計算する。
