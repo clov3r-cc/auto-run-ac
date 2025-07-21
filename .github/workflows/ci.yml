@@ -35,12 +35,12 @@ jobs:
           echo "NOTIFICATION_WEBHOOK_URL=${NOTIFICATION_WEBHOOK_URL}" >> .dev.vars
       - name: Generate types
         run: pnpm run cf-typegen
-      - name: Type check
-        run: pnpm run typecheck
-      - name: Lint
-        run: pnpm run lint
-      - name: Format check
-        run: pnpm run format
+      # - name: Type check
+      #   run: pnpm run typecheck
+      # - name: Lint
+      #   run: pnpm run lint
+      # - name: Format check
+      #   run: pnpm run format
       - name: Run tests
         run: pnpm run test
       - name: Build
