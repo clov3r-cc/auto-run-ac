@@ -1,5 +1,6 @@
 import type { TZDate } from '@date-fns/tz';
-import { formatDate } from 'lib/utils/date.ts';
+import { eachDayOfInterval } from 'date-fns';
+import { calculateYearMonthPairs } from 'lib/utils/date.ts';
 import { z } from 'zod/v4';
 
 const scheduleSchema = z.object({
@@ -11,6 +12,27 @@ const scheduleSchema = z.object({
 });
 
 type Schedule = z.infer<typeof scheduleSchema>;
+
+const KEY_SEPARATOR = ':';
+
+const formatDateWithKeyFormat = (date: TZDate) =>
+  [date.getFullYear(), date.getMonth() + 1, date.getDate()].join(KEY_SEPARATOR);
+
+async function getAllKvEntriesRecursive(
+  kv: KVNamespace,
+  keyPrefix: string,
+  cursor?: string,
+  accumulator: KVNamespaceListResult<unknown, string>['keys'] = [],
+): Promise<KVNamespaceListResult<unknown, string>['keys']> {
+  const result = await kv.list({ prefix: keyPrefix, cursor });
+  accumulator.push(...result.keys);
+
+  if (result.list_complete) {
+    return accumulator;
+  }
+
+  return getAllKvEntriesRecursive(kv, keyPrefix, result.cursor, accumulator);
+}
 
 /**
  * エアコン制御のスケジュールを管理するためのKVストレージ操作を提供する
@@ -24,30 +46,56 @@ export function schedule(kv: KVNamespace) {
      * @param date 取得対象の日付
      * @returns スケジュールが存在する場合はSchedule、存在しない場合はundefined
      */
-    get: (date: TZDate) =>
-      kv.get(formatDate(date)).then((v) => {
-        if (!v) {
+    get: async (date: TZDate) =>
+      kv.getWithMetadata(formatDateWithKeyFormat(date)).then((v) => {
+        if (!v.metadata) {
           return undefined;
         }
 
-        return scheduleSchema.parse(JSON.parse(v));
+        return scheduleSchema.parse(v.metadata);
       }),
     /**
-     * 指定した日付のスケジュールを設定する（24時間後に自動削除）
+     * 指定した期間内のスケジュールのリストを取得する
+     * @param startAt 開始日
+     * @param endAt 終了日
+     * @returns 指定期間内のスケジュールのリスト
+     */
+    listBy: async (startAt: TZDate, endAt: TZDate) => {
+      const fetcher = calculateYearMonthPairs(
+        eachDayOfInterval({ start: startAt, end: endAt }),
+      ).map(({ year, month }) => {
+        const keyPrefix = `${year}${KEY_SEPARATOR}${month + 1}${KEY_SEPARATOR}`;
+
+        return getAllKvEntriesRecursive(kv, keyPrefix);
+      });
+
+      return Promise.all(fetcher).then((results) =>
+        results.flat().map((key) => {
+          const [year, month, day] = key.name.split(KEY_SEPARATOR).map(Number);
+          const date = new Date(year, month - 1, day);
+
+          return {
+            date,
+            schedule: scheduleSchema.parse(key.metadata),
+          };
+        }),
+      );
+    },
+    /**
+     * 指定した日付のスケジュールを設定する
      * @param date 設定対象の日付
      * @param schedule 設定するスケジュール
-     * @returns Promise<void>
      */
-    set: (date: TZDate, schedule: Schedule) =>
-      // 24時間でKVに書き込んだものを削除
-      kv.put(formatDate(date), JSON.stringify(schedule), {
-        expirationTtl: 60 * 60 * 24,
-      }),
+    set: async (date: TZDate, schedule: Schedule) =>
+      // TODO: 24時間でKVに書き込んだものを削除
+      // NOTE: Consider storing your values in metadata if your values fit in the metadata-size limit.
+      // https://developers.cloudflare.com/kv/api/list-keys/
+      kv.put(formatDateWithKeyFormat(date), '', { metadata: { ...schedule } }),
     /**
      * 指定した日付のスケジュールを削除する
      * @param date 削除対象の日付
      * @returns Promise<void>
      */
-    reset: (date: TZDate) => kv.delete(formatDate(date)),
+    reset: async (date: TZDate) => kv.delete(formatDateWithKeyFormat(date)),
   };
 }

@@ -1,79 +1,115 @@
-# Welcome to React Router!
+# エアコン自動制御システム
 
-A modern, production-ready template for building full-stack React applications using React Router.
+SwitchBotとCloudflare Workersを使用した、帰宅時間に合わせてエアコンを自動制御するシステム
 
-## Features
+## 🎯 このシステムでできること
 
-- 🚀 Server-side rendering
-- ⚡️ Hot Module Replacement (HMR)
-- 📦 Asset bundling and optimization
-- 🔄 Data loading and mutations
-- 🔒 TypeScript by default
-- 🎉 TailwindCSS for styling
-- 📖 [React Router docs](https://reactrouter.com/)
+- **自動温度調整**: 帰宅時刻に合わせて最適なタイミングでエアコンを起動
+- **スケジュール管理**: 日常的な帰宅時刻と特別な日の設定
+- **温度監視**: SwitchBot温湿度計による室温の常時監視
+- **Discord通知**: エアコン稼働時の自動通知
 
-## Getting Started
+## 🏠 利用イメージ
 
-### Installation
+### 平日18:00帰宅の場合
 
-Install the dependencies:
+- 室温32℃ → 目標28℃（4℃差）
+- 16:00に自動でエアコン起動
+- 18:00帰宅時には快適な28℃
+
+### 特別な日（早帰り・遅帰り）
+
+- カレンダーで個別設定
+- その日だけの特別スケジュール
+
+## 🛠 技術構成
+
+- **フロントエンド**: React Router（Cloudflare Pages）
+- **バックエンド**: Cloudflare Workers（15分間隔で定期実行）
+- **データ保存**: Cloudflare KV
+- **IoTデバイス**: SwitchBot（温湿度計・エアコン操作）
+- **通知**: Discord Webhook
+
+## 📁 プロジェクト構成
+
+```
+├── docs/              # 設計ドキュメント
+├── app/               # React フロントエンド
+├── workers/           # Cloudflare Workers（制御ロジック）
+└── lib/              # 共有ライブラリ
+```
+
+## 🚀 開発コマンド
+
+### 開発
 
 ```bash
-npm install
+pnpm run dev        # 開発サーバー起動
+pnpm run build      # 本番ビルド
+pnpm run preview    # 本番ビルドのプレビュー
+pnpm run deploy     # Cloudflareへデプロイ
 ```
 
-### Development
-
-Start the development server with HMR:
+### コード品質
 
 ```bash
-npm run dev
+pnpm run lint       # ESLintによるコードチェック
+pnpm run format     # Prettierによるフォーマットチェック
+pnpm run fix        # format:fix + lint:fix
+pnpm run typecheck  # TypeScriptの型チェック
 ```
 
-Your application will be available at `http://localhost:5173`.
+## 📖 ドキュメント
 
-## Previewing the Production Build
+プロジェクトの詳細は`docs/`フォルダ内の設計ドキュメントを参照してください：
 
-Preview the production build locally:
+1. **要件定義** (`01-requirements.md`) - システムの背景・目的・機能要件
+2. **基本設計** (`02-base.md`) - システム全体のアーキテクチャ
+3. **詳細設計** (`03-detail.md`) - 実装に必要な詳細仕様
+
+## 🔧 セットアップ
+
+### 前提条件
+
+- Node.js v22+
+- pnpm
+- Cloudflareアカウント
+- SwitchBotデバイス（温湿度計・エアコン操作用リモコン）
+
+### 環境変数設定
+
+#### `.dev.vars`
+
+```
+SWITCHBOT_TOKEN=your_switchbot_token
+SWITCHBOT_CLIENT_SECRET=your_client_secret
+NOTIFICATION_WEBHOOK_URL=your_discord_webhook_url
+```
+
+#### `.wrangler.jsonc`
+
+```json
+"vars": {
+  "METER_DEVICE_ID": "your_meter_device_id",
+  "AIR_CONDITIONER_DEVICE_ID": "your_ac_device_id"
+}
+```
+
+#### `.env`
+
+```
+CLOUDFLARE_ACCOUNT_ID=your_cloudflare_account_id
+```
+
+### インストール・起動
 
 ```bash
-npm run preview
+pnpm install
+pnpm run dev
 ```
 
-## Building for Production
+## 🎮 使い方
 
-Create a production build:
-
-```bash
-npm run build
-```
-
-## Deployment
-
-Deployment is done using the Wrangler CLI.
-
-To build and deploy directly to production:
-
-```sh
-npm run deploy
-```
-
-To deploy a preview URL:
-
-```sh
-npx wrangler versions upload
-```
-
-You can then promote a version to production after verification or roll it out progressively.
-
-```sh
-npx wrangler versions deploy
-```
-
-## Styling
-
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever CSS framework you prefer.
-
----
-
-Built with ❤️ using React Router.
+1. **スケジュール設定**: 帰宅時刻を設定
+2. **特別日設定**: 早帰り・遅帰りの日をカレンダーで個別設定
+3. **自動実行**: 15分間隔で温度をチェックし、必要に応じてエアコンを制御

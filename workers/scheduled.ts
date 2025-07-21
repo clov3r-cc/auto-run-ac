@@ -3,7 +3,7 @@ import { Result } from '@praha/byethrow';
 import { isBefore, subHours } from 'date-fns';
 import { history } from 'lib/kv/history.ts';
 import { schedule } from 'lib/kv/schedule.ts';
-import { jstDate, utcDate } from './lib/date-wrapper.ts';
+import { jstDate, utcDate } from 'lib/utils/date.ts';
 import { notifyAirConditionerOnToDiscord } from './lib/discord.ts';
 import { switchBotClient } from './lib/switchbot.ts';
 
@@ -102,9 +102,9 @@ export async function scheduledWorker({
 }: Env): Promise<ScheduledWorkerResult> {
   const jstNow = jstDate(new Date());
 
-  const todayState = await history(KV__HISTORY).exists(jstNow);
+  const hasAlreadyProcessedToday = await history(KV__HISTORY).exists(jstNow);
 
-  if (todayState) {
+  if (hasAlreadyProcessedToday) {
     return 'ALREADY_PROCESSED_TODAY';
   }
 
@@ -162,7 +162,7 @@ export async function scheduledWorker({
     return 'AC_CONTROL_ERROR';
   }
 
-  await history(KV__HISTORY).set(jstNow, 'completed');
+  await history(KV__HISTORY).set(jstNow);
 
   const notificationResult = await notifyAirConditionerOnToDiscord(
     NOTIFICATION_WEBHOOK_URL,
