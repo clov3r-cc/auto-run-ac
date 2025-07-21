@@ -54,12 +54,13 @@ const calculateTempThreshold = (
  * @returns スケジュールで指定された「帰宅時刻」
  */
 const calculateArrivalTime = (jstNow: TZDate, schedule: ScheduleConfig) =>
-  new Date(
+  new TZDate(
     jstNow.getFullYear(),
     jstNow.getMonth(),
     jstNow.getDate(),
     schedule.arrivedHome.hour,
     schedule.arrivedHome.minute,
+    'Asia/Tokyo',
   );
 
 /**
