@@ -148,6 +148,13 @@ export async function scheduledWorker({
   );
 
   if (isBefore(jstNow, shouldBeTurnedOnAt)) {
+    console.log(
+      `tempdiff: ${tempDiff}, willArriveHomeAt: ${willArriveHomeAt.toString()}`,
+    );
+    console.log(
+      `Not yet time to turn on AC. Current time: ${jstNow.toString()}, Scheduled time: ${shouldBeTurnedOnAt.toString()}`,
+    );
+
     return 'NOT_YET_TIME';
   }
 
