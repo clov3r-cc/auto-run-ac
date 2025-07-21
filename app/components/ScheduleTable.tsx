@@ -37,11 +37,10 @@ import { cn } from '~/lib/utils.ts';
 // スケジュール表示コンポーネント
 interface ScheduleDisplayProps {
   schedule: ScheduleData;
-  onToggle: (date: Date, isDisabled: boolean) => void;
   onEdit: (date: Date) => void;
 }
 
-function ScheduleDisplay({ schedule, onToggle, onEdit }: ScheduleDisplayProps) {
+function ScheduleDisplay({ schedule, onEdit }: ScheduleDisplayProps) {
   return (
     <div className="flex items-center gap-1">
       <div className="text-muted-foreground flex-1 text-sm font-medium">
@@ -50,7 +49,6 @@ function ScheduleDisplay({ schedule, onToggle, onEdit }: ScheduleDisplayProps) {
       </div>
       <div className="flex items-center gap-1">
         <Button
-          onClick={() => onToggle(new Date(schedule.date), schedule.isDisabled)}
           className={cn(
             'flex h-6 w-6 items-center justify-center rounded border transition-colors',
             !schedule.isDisabled
@@ -91,7 +89,6 @@ interface DateCellProps {
   date: Date;
   schedule: ScheduleData;
   variant?: 'today' | 'saturday' | 'sunday' | 'regular';
-  onScheduleToggle: (date: Date, isDisabled: boolean) => void;
   onScheduleEdit: (date: Date) => void;
 }
 
@@ -100,7 +97,6 @@ function DateCell({
   date,
   schedule,
   variant = 'regular',
-  onScheduleToggle,
   onScheduleEdit,
 }: DateCellProps) {
   const containerStyles = match(variant)
@@ -125,11 +121,7 @@ function DateCell({
       )}
     >
       <div className={cn('mb-1', textStyles)}>{format(date, 'd')}</div>
-      <ScheduleDisplay
-        schedule={schedule}
-        onToggle={onScheduleToggle}
-        onEdit={onScheduleEdit}
-      />
+      <ScheduleDisplay schedule={schedule} onEdit={onScheduleEdit} />
     </div>
   );
 }
@@ -163,14 +155,12 @@ function WeekdayHeader({ day, variant = 'regular' }: WeekdayHeaderProps) {
 interface ScheduleTableProps {
   today: Date;
   schedules: ScheduleData[];
-  onScheduleToggle?: (date: Date, isDisabled: boolean) => void;
   onScheduleEdit?: (date: Date) => void;
 }
 
 export default function ScheduleTable({
   today,
   schedules,
-  onScheduleToggle = () => undefined,
   onScheduleEdit = () => undefined,
 }: ScheduleTableProps) {
   const [currentDate, setCurrentDate] = useState<Date>(today);
@@ -355,7 +345,6 @@ export default function ScheduleTable({
                   date={date}
                   schedule={schedule}
                   variant={variant}
-                  onScheduleToggle={onScheduleToggle}
                   onScheduleEdit={onScheduleEdit}
                 />
               );
