@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { href, Link } from 'react-router';
+import { TZDate } from '@date-fns/tz';
 import {
   addDays,
   addMonths,
@@ -71,7 +72,7 @@ function ScheduleDisplay({ schedule, onEdit }: ScheduleDisplayProps) {
           }}
         >
           <Button
-            onClick={() => onEdit(new Date(schedule.date))}
+            onClick={() => onEdit(schedule.date)}
             className="flex h-6 w-6 items-center justify-center rounded border border-gray-300 bg-gray-50 text-gray-600 transition-colors hover:bg-gray-100"
             title="スケジュールを編集"
             aria-label="スケジュールを編集する"
@@ -204,7 +205,7 @@ export default function ScheduleTable({
 
   // 指定日のスケジュールを検索
   const getScheduleByDate = (date: Date) =>
-    schedules.find((schedule) => isSameDay(new Date(schedule.date), date))!;
+    schedules.find((schedule) => isSameDay(schedule.date, date))!;
 
   // カレンダーグリッドを生成
   const generateCalenderGrids = (isThisMonth: boolean): (Date | null)[] => {
@@ -218,7 +219,7 @@ export default function ScheduleTable({
   // 年月変更ハンドラー
   const handleYearMonthChange = (value: string) => {
     const [year, month] = value.split('-').map(Number);
-    const newDate = new Date(year, month, 1);
+    const newDate = new TZDate(year, month, 1, 'Asia/Tokyo');
     setCurrentDate(newDate);
   };
 
@@ -248,7 +249,7 @@ export default function ScheduleTable({
   };
 
   const goToCurrentMonth = () => {
-    setCurrentDate(new Date(todayYear, todayMonth, 1));
+    setCurrentDate(new TZDate(todayYear, todayMonth, 1, 'Asia/Tokyo'));
   };
 
   return (
