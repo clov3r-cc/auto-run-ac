@@ -27,6 +27,12 @@ jobs:
           cache: 'pnpm'
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+      # `wrangler types`を成功させるため
+      - name: Create .dev.vars
+        run: |
+          echo "${SWITCHBOT_TOKEN}" > .dev.vars
+          echo "${SWITCHBOT_CLIENT_SECRET}" >> .dev.vars
+          echo "${NOTIFICATION_WEBHOOK_URL}" >> .dev.vars
       - name: Generate types
         run: pnpm run cf-typegen
       - name: Type check
