@@ -4,6 +4,10 @@ on:
     branches-ignore:
       - main
   workflow_call:
+env:
+  SWITCHBOT_TOKEN: ${{ secrets.SWITCHBOT_TOKEN }}
+  SWITCHBOT_CLIENT_SECRET: ${{ secrets.SWITCHBOT_CLIENT_SECRET }}
+  NOTIFICATION_WEBHOOK_URL: ${{ secrets.NOTIFICATION_WEBHOOK_URL }}
 jobs:
   ci:
     runs-on: ubuntu-24.04

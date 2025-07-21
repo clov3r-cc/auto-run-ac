@@ -4,6 +4,9 @@ on:
     branches: [main]
 env:
   CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+  SWITCHBOT_TOKEN: ${{ secrets.SWITCHBOT_TOKEN }}
+  SWITCHBOT_CLIENT_SECRET: ${{ secrets.SWITCHBOT_CLIENT_SECRET }}
+  NOTIFICATION_WEBHOOK_URL: ${{ secrets.NOTIFICATION_WEBHOOK_URL }}
 jobs:
   ci:
     uses: clov3r-cc/auto-run-ac/.github/workflows/ci.yaml@main
