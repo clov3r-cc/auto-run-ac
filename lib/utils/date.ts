@@ -10,6 +10,11 @@ const DATE_FORMATTER = 'yyyy-MM-dd';
  */
 export const formatDate = (date: Date) => format(date, DATE_FORMATTER);
 
+export const KEY_SEPARATOR = ':';
+
+export const formatDateWithKeyFormat = (date: TZDate) =>
+  [date.getFullYear(), date.getMonth() + 1, date.getDate()].join(KEY_SEPARATOR);
+
 const JST_TIME_ZONE = 'Asia/Tokyo';
 
 /**

@@ -1,6 +1,10 @@
 import type { TZDate } from '@date-fns/tz';
 import { eachDayOfInterval } from 'date-fns';
-import { calculateYearMonthPairs } from 'lib/utils/date.ts';
+import {
+  calculateYearMonthPairs,
+  formatDateWithKeyFormat,
+  KEY_SEPARATOR,
+} from 'lib/utils/date.ts';
 import { z } from 'zod/v4';
 
 const scheduleSchema = z.object({
@@ -12,11 +16,6 @@ const scheduleSchema = z.object({
 });
 
 type Schedule = z.infer<typeof scheduleSchema>;
-
-const KEY_SEPARATOR = ':';
-
-const formatDateWithKeyFormat = (date: TZDate) =>
-  [date.getFullYear(), date.getMonth() + 1, date.getDate()].join(KEY_SEPARATOR);
 
 async function getAllKvEntriesRecursive(
   kv: KVNamespace,

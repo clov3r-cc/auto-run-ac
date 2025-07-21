@@ -1,7 +1,11 @@
 import { Result } from '@praha/byethrow';
 // eslint-disable-next-line import/no-unresolved
 import { env } from 'cloudflare:test';
-import { formatDate } from 'lib/utils/date.ts';
+import {
+  formatDate,
+  formatDateWithKeyFormat,
+  jstDate,
+} from 'lib/utils/date.ts';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { scheduledWorker } from './scheduled.ts';
 
@@ -61,14 +65,13 @@ describe('scheduledWorker', () => {
     const today = new Date('2024-01-01T15:00:00+09:00');
     vi.setSystemTime(today);
 
-    const scheduleKey = formatDate(today);
-    await env.KV__SCHEDULES.put(
-      scheduleKey,
-      JSON.stringify({
+    const scheduleKey = formatDateWithKeyFormat(jstDate(today));
+    await env.KV__SCHEDULES.put(scheduleKey, '', {
+      metadata: {
         arrivedHome: { hour: 18, minute: 0 },
         isDisabled: true,
-      }),
-    );
+      },
+    });
 
     const result = await scheduledWorker(mockEnv);
 
