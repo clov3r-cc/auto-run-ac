@@ -15,6 +15,7 @@
 ### 設計ドキュメント
 
 詳細な仕様は`docs/`フォルダ内を参照：
+
 - `01-requirements.md` - 要件定義（背景・目的・機能要件）
 - `02-base.md` - 基本設計（システム全体アーキテクチャ）
 - `03-detail.md` - 詳細設計（実装仕様）
@@ -76,7 +77,7 @@ pnpm dlx wrangler versions deploy   # 本番へのデプロイ
 - `wrangler.jsonc` - Cloudflare Workers設定、環境変数、KVバインディング
 - `workers/scheduled.ts` - エアコン制御のメインロジック
 - 温度しきい値: 最低20°C、最高28°C（環境変数で設定）
-- KV設計: 機能別分離（KV__SCHEDULES、KV__HISTORY）
+- KV設計: 機能別分離（KV**SCHEDULES、KV**HISTORY）
 
 ### 開発時の注意点
 
