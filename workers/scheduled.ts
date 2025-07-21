@@ -144,19 +144,19 @@ export async function scheduledWorker({
 
   const tempDiff = calculateTempDiff(actualTemp, tempThreshold);
   const willArriveHomeAt = calculateArrivalTime(jstNow, foundSchedule);
+  console.log(foundSchedule);
   const shouldBeTurnedOnAt = calculateOptimalStartTime(
     willArriveHomeAt,
     tempDiff,
   );
+  console.log(
+    `tempdiff: ${tempDiff}, willArriveHomeAt: ${willArriveHomeAt.toString()}`,
+  );
+  console.log(
+    `Current time: ${jstNow.toString()}, Scheduled time: ${shouldBeTurnedOnAt.toString()}`,
+  );
 
   if (isBefore(jstNow, shouldBeTurnedOnAt)) {
-    console.log(
-      `tempdiff: ${tempDiff}, willArriveHomeAt: ${willArriveHomeAt.toString()}`,
-    );
-    console.log(
-      `Not yet time to turn on AC. Current time: ${jstNow.toString()}, Scheduled time: ${shouldBeTurnedOnAt.toString()}`,
-    );
-
     return 'NOT_YET_TIME';
   }
 
