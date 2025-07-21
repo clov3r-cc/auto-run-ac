@@ -55,7 +55,7 @@ const calculateTempThreshold = (
  */
 const calculateArrivalTime = (jstNow: TZDate, schedule: ScheduleConfig) =>
   jstDate(
-    new TZDate(
+    new Date(
       jstNow.getFullYear(),
       jstNow.getMonth(),
       jstNow.getDate(),
