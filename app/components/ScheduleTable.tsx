@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { href, Link } from 'react-router';
+import { TZDate } from '@date-fns/tz';
 import {
   addDays,
   addMonths,
@@ -37,11 +38,10 @@ import { cn } from '~/lib/utils.ts';
 // スケジュール表示コンポーネント
 interface ScheduleDisplayProps {
   schedule: ScheduleData;
-  onToggle: (date: Date, isDisabled: boolean) => void;
   onEdit: (date: Date) => void;
 }
 
-function ScheduleDisplay({ schedule, onToggle, onEdit }: ScheduleDisplayProps) {
+function ScheduleDisplay({ schedule, onEdit }: ScheduleDisplayProps) {
   return (
     <div className="flex items-center gap-1">
       <div className="text-muted-foreground flex-1 text-sm font-medium">
@@ -50,7 +50,6 @@ function ScheduleDisplay({ schedule, onToggle, onEdit }: ScheduleDisplayProps) {
       </div>
       <div className="flex items-center gap-1">
         <Button
-          onClick={() => onToggle(new Date(schedule.date), schedule.isDisabled)}
           className={cn(
             'flex h-6 w-6 items-center justify-center rounded border transition-colors',
             !schedule.isDisabled
@@ -73,7 +72,7 @@ function ScheduleDisplay({ schedule, onToggle, onEdit }: ScheduleDisplayProps) {
           }}
         >
           <Button
-            onClick={() => onEdit(new Date(schedule.date))}
+            onClick={() => onEdit(schedule.date)}
             className="flex h-6 w-6 items-center justify-center rounded border border-gray-300 bg-gray-50 text-gray-600 transition-colors hover:bg-gray-100"
             title="スケジュールを編集"
             aria-label="スケジュールを編集する"
@@ -91,7 +90,6 @@ interface DateCellProps {
   date: Date;
   schedule: ScheduleData;
   variant?: 'today' | 'saturday' | 'sunday' | 'regular';
-  onScheduleToggle: (date: Date, isDisabled: boolean) => void;
   onScheduleEdit: (date: Date) => void;
 }
 
@@ -100,7 +98,6 @@ function DateCell({
   date,
   schedule,
   variant = 'regular',
-  onScheduleToggle,
   onScheduleEdit,
 }: DateCellProps) {
   const containerStyles = match(variant)
@@ -125,11 +122,7 @@ function DateCell({
       )}
     >
       <div className={cn('mb-1', textStyles)}>{format(date, 'd')}</div>
-      <ScheduleDisplay
-        schedule={schedule}
-        onToggle={onScheduleToggle}
-        onEdit={onScheduleEdit}
-      />
+      <ScheduleDisplay schedule={schedule} onEdit={onScheduleEdit} />
     </div>
   );
 }
@@ -163,14 +156,12 @@ function WeekdayHeader({ day, variant = 'regular' }: WeekdayHeaderProps) {
 interface ScheduleTableProps {
   today: Date;
   schedules: ScheduleData[];
-  onScheduleToggle?: (date: Date, isDisabled: boolean) => void;
   onScheduleEdit?: (date: Date) => void;
 }
 
 export default function ScheduleTable({
   today,
   schedules,
-  onScheduleToggle = () => undefined,
   onScheduleEdit = () => undefined,
 }: ScheduleTableProps) {
   const [currentDate, setCurrentDate] = useState<Date>(today);
@@ -214,7 +205,7 @@ export default function ScheduleTable({
 
   // 指定日のスケジュールを検索
   const getScheduleByDate = (date: Date) =>
-    schedules.find((schedule) => isSameDay(new Date(schedule.date), date))!;
+    schedules.find((schedule) => isSameDay(schedule.date, date))!;
 
   // カレンダーグリッドを生成
   const generateCalenderGrids = (isThisMonth: boolean): (Date | null)[] => {
@@ -228,7 +219,7 @@ export default function ScheduleTable({
   // 年月変更ハンドラー
   const handleYearMonthChange = (value: string) => {
     const [year, month] = value.split('-').map(Number);
-    const newDate = new Date(year, month, 1);
+    const newDate = new TZDate(year, month, 1, 'Asia/Tokyo');
     setCurrentDate(newDate);
   };
 
@@ -258,7 +249,7 @@ export default function ScheduleTable({
   };
 
   const goToCurrentMonth = () => {
-    setCurrentDate(new Date(todayYear, todayMonth, 1));
+    setCurrentDate(new TZDate(todayYear, todayMonth, 1, 'Asia/Tokyo'));
   };
 
   return (
@@ -355,7 +346,6 @@ export default function ScheduleTable({
                   date={date}
                   schedule={schedule}
                   variant={variant}
-                  onScheduleToggle={onScheduleToggle}
                   onScheduleEdit={onScheduleEdit}
                 />
               );

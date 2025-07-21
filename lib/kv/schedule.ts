@@ -1,4 +1,4 @@
-import type { TZDate } from '@date-fns/tz';
+import { TZDate } from '@date-fns/tz';
 import { eachDayOfInterval } from 'date-fns';
 import {
   calculateYearMonthPairs,
@@ -71,12 +71,9 @@ export function schedule(kv: KVNamespace) {
       return Promise.all(fetcher).then((results) =>
         results.flat().map((key) => {
           const [year, month, day] = key.name.split(KEY_SEPARATOR).map(Number);
-          const date = new Date(year, month - 1, day);
+          const date = new TZDate(year, month - 1, day, 'Asia/Tokyo');
 
-          console.log(
-            `date: ${date.toString()}`,
-            `schedule: ${!!key.metadata}`,
-          );
+          console.dir(date, scheduleSchema.safeParse(key.metadata));
 
           return {
             date,
