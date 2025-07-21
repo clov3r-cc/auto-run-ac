@@ -9,7 +9,7 @@ env:
   NOTIFICATION_WEBHOOK_URL: ${{ secrets.NOTIFICATION_WEBHOOK_URL }}
 jobs:
   ci:
-    uses: clov3r-cc/auto-run-ac/.github/workflows/ci.yaml@main
+    uses: clov3r-cc/auto-run-ac/.github/workflows/ci.yml@main
   deploy:
     runs-on: ubuntu-24.04
     timeout-minutes: 10
