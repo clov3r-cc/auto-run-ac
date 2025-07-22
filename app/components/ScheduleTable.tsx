@@ -43,7 +43,7 @@ interface ScheduleDisplayProps {
 
 function ScheduleDisplay({ schedule, onEdit }: ScheduleDisplayProps) {
   return (
-    <div className="flex items-center gap-1">
+    <div className="flex items-center gap-2">
       <div className="text-muted-foreground flex-1 text-sm font-medium">
         {String(schedule.arrivedHome.hour).padStart(2, '0')}:
         {String(schedule.arrivedHome.minute).padStart(2, '0')}
@@ -277,7 +277,6 @@ export default function ScheduleTable({
                 ))}
               </SelectContent>
             </Select>
-            <span>の起動スケジュール</span>
           </CardTitle>
           <div className="mt-2 flex items-center justify-center gap-2">
             <Button
@@ -302,54 +301,116 @@ export default function ScheduleTable({
           </div>
         </CardHeader>
         <CardContent>
-          <div className="mb-4 grid grid-cols-7 gap-2">
-            {getWeekdayHeaders().map((day, index) => (
-              <WeekdayHeader
-                key={day}
-                day={day}
-                variant={
-                  index === 5 ? 'saturday' : index === 6 ? 'sunday' : 'regular'
-                }
-              />
-            ))}
-          </div>
-          <div className="grid grid-cols-7 gap-2">
-            {generateCalenderGrids(
-              currentMonthDays.some((date) => isSameDay(date, today)),
-            ).map((date, index) => {
-              if (!date) {
-                return <div key={index} className="h-20"></div>;
-              }
-
-              const isToday = isSameDay(date, today);
-              const isPastDate = date < today && !isToday;
-              const isSaturday = getDay(date) === 6;
-              const isSunday = getDay(date) === 0;
-
-              if (isPastDate) {
-                return undefined;
-              }
-
-              const variant = isToday
-                ? 'today'
-                : isSaturday
-                  ? 'saturday'
-                  : isSunday
-                    ? 'sunday'
-                    : 'regular';
-
-              const schedule = getScheduleByDate(date);
-
-              return (
-                <DateCell
-                  key={date.toISOString()}
-                  date={date}
-                  schedule={schedule}
-                  variant={variant}
-                  onScheduleEdit={onScheduleEdit}
+          {/* デスクトップ用カレンダー表示 */}
+          <div className="hidden md:block">
+            <div className="mb-4 grid grid-cols-7 gap-2">
+              {getWeekdayHeaders().map((day, index) => (
+                <WeekdayHeader
+                  key={day}
+                  day={day}
+                  variant={
+                    index === 5
+                      ? 'saturday'
+                      : index === 6
+                        ? 'sunday'
+                        : 'regular'
+                  }
                 />
-              );
-            })}
+              ))}
+            </div>
+            <div className="grid grid-cols-7 gap-2">
+              {generateCalenderGrids(
+                currentMonthDays.some((date) => isSameDay(date, today)),
+              ).map((date, index) => {
+                if (!date) {
+                  return <div key={index} className="h-20"></div>;
+                }
+
+                const isToday = isSameDay(date, today);
+                const isPastDate = date < today && !isToday;
+                const isSaturday = getDay(date) === 6;
+                const isSunday = getDay(date) === 0;
+
+                if (isPastDate) {
+                  return undefined;
+                }
+
+                const variant = isToday
+                  ? 'today'
+                  : isSaturday
+                    ? 'saturday'
+                    : isSunday
+                      ? 'sunday'
+                      : 'regular';
+
+                const schedule = getScheduleByDate(date);
+
+                return (
+                  <DateCell
+                    key={date.toISOString()}
+                    date={date}
+                    schedule={schedule}
+                    variant={variant}
+                    onScheduleEdit={onScheduleEdit}
+                  />
+                );
+              })}
+            </div>
+          </div>
+
+          {/* モバイル用リスト表示 */}
+          <div className="block md:hidden">
+            <div className="space-y-2">
+              {currentMonthDays
+                .filter((date) => {
+                  const isToday = isSameDay(date, today);
+                  const isPastDate = date < today && !isToday;
+
+                  return !isPastDate;
+                })
+                .map((date) => {
+                  const isToday = isSameDay(date, today);
+                  const isSaturday = getDay(date) === 6;
+                  const isSunday = getDay(date) === 0;
+                  const schedule = getScheduleByDate(date);
+
+                  const dateStyle = isToday
+                    ? 'text-orange-700 font-bold'
+                    : isSaturday
+                      ? 'text-blue-600 font-medium'
+                      : isSunday
+                        ? 'text-red-600 font-medium'
+                        : 'text-foreground font-medium';
+
+                  const bgStyle = isToday
+                    ? 'bg-orange-50 border-orange-200'
+                    : isSaturday
+                      ? 'bg-blue-50 border-blue-200'
+                      : isSunday
+                        ? 'bg-red-50 border-red-200'
+                        : 'bg-background border-border';
+
+                  return (
+                    <div
+                      key={date.toISOString()}
+                      className={cn(
+                        'flex items-center justify-between rounded-lg border p-3',
+                        bgStyle,
+                      )}
+                    >
+                      <div className="flex items-center gap-3">
+                        <div className={cn('text-lg', dateStyle)}>
+                          {format(date, 'd日（EEEEEE）', { locale: ja })}
+                        </div>
+                      </div>
+                      <ScheduleDisplay
+                        schedule={schedule}
+                        onEdit={onScheduleEdit}
+                      />
+                    </div>
+                  );
+                })}
+            </div>
           </div>
         </CardContent>
       </Card>
