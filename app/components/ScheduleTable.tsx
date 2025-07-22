@@ -277,7 +277,6 @@ export default function ScheduleTable({
                 ))}
               </SelectContent>
             </Select>
-            <span>の起動スケジュール</span>
           </CardTitle>
           <div className="mt-2 flex items-center justify-center gap-2">
             <Button
