@@ -85,7 +85,7 @@ pnpm dlx wrangler versions deploy   # 本番へのデプロイ
 - `mise.toml` - 開発環境管理ツール設定
 - `workers/scheduled.ts` - エアコン制御のメインロジック
 - 温度しきい値: 最低20°C、最高28°C（環境変数で設定）
-- KV設計: 機能別分離（KV__SCHEDULES、KV__HISTORY）
+- KV設計: 機能別分離（KV**SCHEDULES、KV**HISTORY）
 
 ### 開発時の注意点
 
