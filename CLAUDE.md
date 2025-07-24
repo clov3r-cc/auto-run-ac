@@ -40,6 +40,7 @@ pnpm run format     # Prettierによるフォーマットチェック
 pnpm run format:fix # Prettierによる自動フォーマット
 pnpm run fix        # format:fix + lint:fix
 pnpm run typecheck  # TypeScriptの型チェック
+pnpm run test       # Vitestによるテスト実行
 ```
 
 ### Cloudflare固有
@@ -54,7 +55,9 @@ pnpm dlx wrangler versions deploy   # 本番へのデプロイ
 
 ### ディレクトリ構造
 
-- `app/` - React Routerフロントエンドアプリケーション
+- `app/` - React Router v7フロントエンドアプリケーション
+  - `components/ui/` - shadcn/ui + Radix UIコンポーネント
+  - `routes/` - React Router v7ルート定義
 - `workers/` - Cloudflare Workers（サーバー側処理）
   - `app.ts` - メインワーカー（React Router + スケジューリング）
   - `scheduled.ts` - cron処理（15分毎にエアコン制御を実行）
@@ -62,6 +65,7 @@ pnpm dlx wrangler versions deploy   # 本番へのデプロイ
 - `lib/` - 共有ライブラリ
   - `domain/` - ドメインモデル
   - `kv/` - Cloudflare KVストレージ操作
+  - `utils/` - 日付処理（@date-fns/tz）等のユーティリティ
 
 ### 主要機能
 
@@ -75,13 +79,21 @@ pnpm dlx wrangler versions deploy   # 本番へのデプロイ
 ### 重要な設定
 
 - `wrangler.jsonc` - Cloudflare Workers設定、環境変数、KVバインディング
+- `react-router.config.ts` - React Router v7設定
+- `vitest.config.ts` - Cloudflare Workers用テスト設定
+- `components.json` - shadcn/ui設定
+- `mise.toml` - 開発環境管理ツール設定
 - `workers/scheduled.ts` - エアコン制御のメインロジック
 - 温度しきい値: 最低20°C、最高28°C（環境変数で設定）
-- KV設計: 機能別分離（KV**SCHEDULES、KV**HISTORY）
+- KV設計: 機能別分離（KV__SCHEDULES、KV__HISTORY）
 
 ### 開発時の注意点
 
 - pnpmを使用（package.json:15でnpm/yarnを禁止）
+- miseによる開発環境管理（mise.toml）
 - Lefthoook設定済み（lefthook.yaml）
 - TypeScript厳格設定
 - Zod importを禁止（eslintルール）
+- Cloudflare Workers専用Vitestテスト環境
+- shadcn/ui + Tailwind CSSスタイリング
+- @date-fns/tzによるタイムゾーン処理
