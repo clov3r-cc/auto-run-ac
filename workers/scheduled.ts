@@ -1,6 +1,6 @@
 import { TZDate } from '@date-fns/tz';
 import { Result } from '@praha/byethrow';
-import { isBefore, subHours } from 'date-fns';
+import { isAfter, isBefore, isEqual, subHours } from 'date-fns';
 import { history } from 'lib/kv/history.ts';
 import { schedule } from 'lib/kv/schedule.ts';
 import { jstDate, utcDate } from 'lib/utils/date.ts';
@@ -79,6 +79,7 @@ const calculateOptimalStartTime = (arrivalTime: TZDate, tempDiff: number) => {
 const _scheduledWorkerResults = [
   'ALREADY_PROCESSED_TODAY',
   'SCHEDULE_DISABLED',
+  'ALREADY_ARRIVED',
   'TEMPERATURE_IN_RANGE',
   'NOT_YET_TIME',
   'AC_TURNED_ON_SUCCESS',
@@ -121,6 +122,12 @@ export async function scheduledWorker({
     return 'SCHEDULE_DISABLED';
   }
 
+  const willArriveHomeAt = calculateArrivalTime(jstNow, foundSchedule);
+
+  if (isEqual(jstNow, willArriveHomeAt) || isAfter(jstNow, willArriveHomeAt)) {
+    return 'ALREADY_ARRIVED';
+  }
+
   const client = switchBotClient(SWITCHBOT_TOKEN, SWITCHBOT_CLIENT_SECRET);
   const meterResult = await client.getCurrentTemp(METER_DEVICE_ID);
 
@@ -142,7 +149,6 @@ export async function scheduledWorker({
   }
 
   const tempDiff = calculateTempDiff(actualTemp, tempThreshold);
-  const willArriveHomeAt = calculateArrivalTime(jstNow, foundSchedule);
   const shouldBeTurnedOnAt = calculateOptimalStartTime(
     willArriveHomeAt,
     tempDiff,

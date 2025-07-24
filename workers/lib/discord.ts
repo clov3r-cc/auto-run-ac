@@ -54,7 +54,12 @@ export async function notifyAirConditionerOnToDiscord(
       res.ok
         ? Result.succeed({})
         : Result.fail(
-            new HttpError(res.status, res.statusText, 'POST request'),
+            new HttpError(
+              res.status,
+              res.statusText,
+              'Failed to post webhook',
+              body,
+            ),
           ),
     ),
   );
