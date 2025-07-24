@@ -25,7 +25,8 @@ const scheduled: ExportedHandlerScheduledHandler<Env> = async (
   env,
   _ctx,
 ) => {
-  await scheduledWorker(env);
+  const result = await scheduledWorker(env);
+  console.log(result);
 };
 
 export default {
