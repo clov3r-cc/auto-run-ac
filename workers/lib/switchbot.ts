@@ -150,7 +150,7 @@ const makeRequest = (
 const fromMode = (mode: Mode) => {
   switch (mode) {
     case 'auto':
-      return 0;
+      return 1;
     case 'cool':
       return 2;
     case 'heat':
