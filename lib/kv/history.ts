@@ -22,6 +22,6 @@ export function history(kv: KVNamespace) {
      */
     set: async (date: Date) =>
       // 24時間でKVに書き込んだものを削除
-      kv.put(formatDate(date), '', { expirationTtl: 60 * 60 * 24 }),
+      kv.put(formatDate(date), 'done', { expirationTtl: 60 * 60 * 24 }),
   };
 }
