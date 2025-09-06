@@ -10,10 +10,10 @@ importers:
     dependencies:
       '@conform-to/react':
         specifier: ^1.8.1
-        version: 1.8.2(react@19.1.1)
+        version: 1.9.0(react@19.1.1)
       '@conform-to/zod':
         specifier: ^1.8.1
-        version: 1.8.2(zod@3.25.76)
+        version: 1.9.0(zod@3.25.76)
       '@date-fns/tz':
         specifier: ^1.2.0
         version: 1.4.1
@@ -357,16 +357,16 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@conform-to/dom@1.8.2':
-    resolution: {integrity: sha512-5eDqI9366+23Fl/E5zxebuy2FCebJKpSrdE/c6PZQ5Ul59BYQ17pBmkLkvxAKjPXW+Qq77BJyjGjuklwmqN08A==}
+  '@conform-to/dom@1.9.0':
+    resolution: {integrity: sha512-aukL19Y/isqa8vXkYBpOtJbUAttaxpHXTLm/2NMj8TMNRmmVdPkJK8l6ClJM4p8cAPUHi3WrRMRoHSBAR56v8w==}
 
-  '@conform-to/react@1.8.2':
-    resolution: {integrity: sha512-AJuHH4YY64o+VP3qsXd7bqlqCJYefTcEVj6mOiQr/m9iQV785gPtGE31jdmipvQ3ZHQE0Lp4e4th7kN/xo46qg==}
+  '@conform-to/react@1.9.0':
+    resolution: {integrity: sha512-73VdST7vcdblk5SrFeR3xH+pPUuO91Gy9HuC5k0SbeaEDYUiEkdAOfWvDWrcvUBsNsr1EpBmJWQp+MU0pNl+xQ==}
     peerDependencies:
       react: '>=18'
 
-  '@conform-to/zod@1.8.2':
-    resolution: {integrity: sha512-uYipAoNByusRji7j84o40r9IvYmsV84utfCfvqr2b746/8JnBuoO6C90yltan5D9OVAJMIKejXW4T1XfOsaMWg==}
+  '@conform-to/zod@1.9.0':
+    resolution: {integrity: sha512-OWrSXO7bzEO9Gn4iQSWFHI1kqOdIp/tE1VTNsaWe++B9pGaQI3vh1c3uwmEsFQxAMPIpecJycxJpu4zKyh0iDA==}
     peerDependencies:
       zod: ^3.21.0 || ^4.0.0
 
@@ -3940,16 +3940,16 @@ snapshots:
   '@cloudflare/workerd-windows-64@1.20250823.0':
     optional: true
 
-  '@conform-to/dom@1.8.2': {}
+  '@conform-to/dom@1.9.0': {}
 
-  '@conform-to/react@1.8.2(react@19.1.1)':
+  '@conform-to/react@1.9.0(react@19.1.1)':
     dependencies:
-      '@conform-to/dom': 1.8.2
+      '@conform-to/dom': 1.9.0
       react: 19.1.1
 
-  '@conform-to/zod@1.8.2(zod@3.25.76)':
+  '@conform-to/zod@1.9.0(zod@3.25.76)':
     dependencies:
-      '@conform-to/dom': 1.8.2
+      '@conform-to/dom': 1.9.0
       zod: 3.25.76
 
   '@cspotcode/source-map-support@0.8.1':
