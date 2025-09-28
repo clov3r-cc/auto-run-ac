@@ -1,8 +1,5 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["github>Lucky3028/renovate"],
-  "ignoreDeps": [
-    "wrangler",
-    "zod"
-  ]
+  "ignoreDeps": ["wrangler", "zod"]
 }
