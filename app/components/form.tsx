@@ -26,7 +26,11 @@ export function Select({
   ...props
 }: SelectProps) {
   const selectRef = useRef<React.ComponentRef<typeof SelectTrigger>>(null);
-  const control = useControl({
+  const {
+    value: selectedValue,
+    register: registerSelectedFn,
+    ...control
+  } = useControl({
     defaultValue,
     onFocus() {
       selectRef.current?.focus();
@@ -35,9 +39,9 @@ export function Select({
 
   return (
     <>
-      <input name={name} ref={control.register} hidden />
+      <input name={name} ref={registerSelectedFn} hidden />
       <ShadcnSelect
-        value={control.value}
+        value={selectedValue}
         onValueChange={(value) => control.change(value)}
         onOpenChange={(open) => {
           if (!open) {
@@ -77,7 +81,11 @@ export function Checkbox({
   ...props
 }: CheckboxProps) {
   const checkboxRef = useRef<React.ComponentRef<typeof ShadcnCheckbox>>(null);
-  const control = useControl({
+  const {
+    checked: isChecked,
+    register: registerCheckboxFn,
+    ...control
+  } = useControl({
     defaultChecked,
     value,
     onFocus() {
@@ -87,11 +95,11 @@ export function Checkbox({
 
   return (
     <>
-      <input type="checkbox" ref={control.register} name={name} hidden />
+      <input type="checkbox" ref={registerCheckboxFn} name={name} hidden />
       <ShadcnCheckbox
         {...props}
         ref={checkboxRef}
-        checked={control.checked}
+        checked={isChecked}
         onCheckedChange={(checked) => control.change(checked)}
         onBlur={() => control.blur()}
         className={`rounded focus:ring-2 focus:ring-stone-950 focus:ring-offset-2 ${className}`}
