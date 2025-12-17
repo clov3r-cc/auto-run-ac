@@ -10,10 +10,10 @@ importers:
     dependencies:
       '@conform-to/react':
         specifier: ^1.8.1
-        version: 1.14.1(react@19.2.3)
+        version: 1.15.0(react@19.2.3)
       '@conform-to/zod':
         specifier: ^1.8.1
-        version: 1.14.1(zod@3.25.76)
+        version: 1.15.0(zod@3.25.76)
       '@date-fns/tz':
         specifier: ^1.2.0
         version: 1.4.1
@@ -51,8 +51,8 @@ importers:
         specifier: ^5.1.28
         version: 5.1.32
       lucide-react:
-        specifier: ^0.556.0
-        version: 0.556.0(react@19.2.3)
+        specifier: ^0.561.0
+        version: 0.561.0(react@19.2.3)
       react:
         specifier: ^19.1.0
         version: 19.2.3
@@ -435,16 +435,16 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@conform-to/dom@1.14.1':
-    resolution: {integrity: sha512-5ztGcVOo7KbgLBps/OCaxeXPgWxBQzPhBZ3WV3hKC2EkXGv5uP1mqVQKc6rB3QBDCJFyjWugc7OvwZ1nAks9rA==}
+  '@conform-to/dom@1.15.0':
+    resolution: {integrity: sha512-v7sUaObBAgEnWi1AyMJBtfr8FAJ7cjhF9/t0QD0BUhN8JCd7KbZdv/r8TEdvODjEMXpuk2gX2QHV9qniZZLVTw==}
 
-  '@conform-to/react@1.14.1':
-    resolution: {integrity: sha512-X74XoTiiVyNH4LEU6QX8c+2eqnB1cshAwnjqZsNDjrT9Nvn+b2wMG0QjjMxZ4ARiWt4rY81Vn1R/nliZcTSh4A==}
+  '@conform-to/react@1.15.0':
+    resolution: {integrity: sha512-ZdUtpwXGwVpAn1hfsNIgxezzjBT0zJn4paaBEvVT9OYcrAlCvyXG1bKco2b2iZbCn7V93g+8IEXUFFLOdF5FmQ==}
     peerDependencies:
       react: '>=18'
 
-  '@conform-to/zod@1.14.1':
-    resolution: {integrity: sha512-eGg5Hq97X1iq1SaJL48mIn7bJGfJNf6bHt6TLhCAqVGCYaeSuq+592YMe4hps3aii1dJ3qRDGs75kj3/nsBUgA==}
+  '@conform-to/zod@1.15.0':
+    resolution: {integrity: sha512-+SKn73oycr9ITnqNgdazibmLVhYttd4xi7Ssc9auUcDS8whYsYh9dUBSa2IgRaeULtviBQqXNSl90CcDtqfpew==}
     peerDependencies:
       zod: ^3.21.0 || ^4.0.0
 
@@ -3024,8 +3024,8 @@ packages:
     resolution: {integrity: sha512-jumlc0BIUrS3qJGgIkWZsyfAM7NCWiBcCDhnd+3NNM5KbBmLTgHVfWBcg6W+rLUsIpzpERPsvwUP7CckAQSOoA==}
     engines: {node: '>=12'}
 
-  lucide-react@0.556.0:
-    resolution: {integrity: sha512-iOb8dRk7kLaYBZhR2VlV1CeJGxChBgUthpSP8wom9jfj79qovgG6qcSdiy6vkoREKPnbUYzJsCn4o4PtG3Iy+A==}
+  lucide-react@0.561.0:
+    resolution: {integrity: sha512-Y59gMY38tl4/i0qewcqohPdEbieBy7SovpBL9IFebhc2mDd8x4PZSOsiFRkpPcOq6bj1r/mjH/Rk73gSlIJP2A==}
     peerDependencies:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
@@ -4244,16 +4244,16 @@ snapshots:
   '@cloudflare/workerd-windows-64@1.20251210.0':
     optional: true
 
-  '@conform-to/dom@1.14.1': {}
+  '@conform-to/dom@1.15.0': {}
 
-  '@conform-to/react@1.14.1(react@19.2.3)':
+  '@conform-to/react@1.15.0(react@19.2.3)':
     dependencies:
-      '@conform-to/dom': 1.14.1
+      '@conform-to/dom': 1.15.0
       react: 19.2.3
 
-  '@conform-to/zod@1.14.1(zod@3.25.76)':
+  '@conform-to/zod@1.15.0(zod@3.25.76)':
     dependencies:
-      '@conform-to/dom': 1.14.1
+      '@conform-to/dom': 1.15.0
       zod: 3.25.76
 
   '@cspotcode/source-map-support@0.8.1':
@@ -6695,7 +6695,7 @@ snapshots:
 
   lru-cache@7.18.3: {}
 
-  lucide-react@0.556.0(react@19.2.3):
+  lucide-react@0.561.0(react@19.2.3):
     dependencies:
       react: 19.2.3
 
