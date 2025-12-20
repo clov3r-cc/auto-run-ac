@@ -15,16 +15,17 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
-      - name: Install 'pnpm'
-        uses: pnpm/action-setup@v4
+      - name: Install dev deps
+        uses: jdx/mise-action@v3
+      - name: Get pnpm cache directory path
+        id: pnpm-cache-dir-path
+        run: echo "dir=$(pnpm store path --silent)" >> $GITHUB_OUTPUT
+      - uses: actions/cache@v4
         with:
-          version: 'latest'
-          run_install: false
-      - name: Install Node.js
-        uses: actions/setup-node@v6
-        with:
-          node-version: 24
-          cache: 'pnpm'
+          path: ${{ steps.pnpm-cache-dir-path.outputs.dir }}
+          key: pnpm-cache-${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            pnpm-cache-${{ runner.os }}-
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
       # `wrangler types`を成功させるため
