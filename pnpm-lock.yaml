@@ -21,8 +21,8 @@ importers:
         specifier: ^2.5.1
         version: 2.5.1
       '@praha/byethrow':
-        specifier: ^0.8.0
-        version: 0.8.2(typescript@5.9.3)
+        specifier: ^0.9.0
+        version: 0.9.0(typescript@5.9.3)
       '@radix-ui/react-checkbox':
         specifier: ^1.3.2
         version: 1.3.3(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
@@ -1160,8 +1160,8 @@ packages:
   '@poppinss/exception@1.2.3':
     resolution: {integrity: sha512-dCED+QRChTVatE9ibtoaxc+WkdzOSjYTKi/+uacHWIsfodVfpsueo3+DKpgU5Px8qXjgmXkSvhXvSCz3fnP9lw==}
 
-  '@praha/byethrow@0.8.2':
-    resolution: {integrity: sha512-gUpjF6EVLbrSVH7XRfn3Ti655Hs87U0yZwdGJ5eIYUM27B94fqD7bkPh+ZLtEmd56LwBYWtk9uYkseenNfgxcQ==}
+  '@praha/byethrow@0.9.0':
+    resolution: {integrity: sha512-D8XhQ40RsGkwcJdKYqoQ2RUfoqgzztHWXZNpMaRE5P5U+D1c1YboFPc8hysJWQhqloQ32kCXB0XPwM3dFiNyIg==}
     peerDependencies:
       typescript: '>=5.0.0'
 
@@ -4691,7 +4691,7 @@ snapshots:
 
   '@poppinss/exception@1.2.3': {}
 
-  '@praha/byethrow@0.8.2(typescript@5.9.3)':
+  '@praha/byethrow@0.9.0(typescript@5.9.3)':
     dependencies:
       '@standard-schema/spec': 1.1.0
       typescript: 5.9.3
