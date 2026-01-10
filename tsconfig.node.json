@@ -5,11 +5,7 @@
   "compilerOptions": {
     "composite": true,
     "strict": true,
-    "types": [
-      "node",
-      "./worker-configuration.d.ts",
-      "@cloudflare/vitest-pool-workers"
-    ],
+    "types": ["node"],
     "lib": ["ES2022"],
     "target": "ES2022",
     "module": "ES2022",
