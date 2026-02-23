@@ -49,7 +49,7 @@ export async function notifyAirConditionerOnToDiscord(
           body: JSON.stringify(body),
         }),
       catch: (err) => new Error('Failed to post Webhook', { cause: err }),
-    })(),
+    }),
     Result.andThen((res) =>
       res.ok
         ? Result.succeed({})

@@ -116,7 +116,7 @@ const makeRequest = (
       try: async () => generateAuthorizationHeader(credentials),
       catch: (err) =>
         new Error('Failed to generate authorization header', { cause: err }),
-    })(),
+    }),
     Result.map((headers) =>
       method === 'POST'
         ? { ...headers, 'Content-Type': 'application/json' }
@@ -131,7 +131,7 @@ const makeRequest = (
             body: data ? JSON.stringify(data) : undefined,
           }),
         catch: () => new HttpError(500, 'Internal Server Error'),
-      })(),
+      }),
     ),
     Result.andThen((res) =>
       res.ok
@@ -187,7 +187,7 @@ export function switchBotClient(token: string, secret: string) {
           Result.try({
             try: async () => res.json(),
             catch: () => new Error('Failed to parse JSON from response'),
-          })(),
+          }),
         ),
         Result.andThen((json) => {
           const parsed = meterStatusResponse.safeParse(json);
