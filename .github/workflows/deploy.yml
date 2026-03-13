@@ -18,7 +18,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v6
       - name: Install dev deps
-        uses: jdx/mise-action@v3
+        uses: jdx/mise-action@v4
       - name: Get pnpm cache directory path
         id: pnpm-cache-dir-path
         run: echo "dir=$(pnpm store path --silent)" >> $GITHUB_OUTPUT
