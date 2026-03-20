@@ -39,9 +39,19 @@ describe('scheduledWorker', () => {
     NOTIFICATION_WEBHOOK_URL: 'https://example.com/webhook',
   } as const;
 
-  beforeEach(() => {
+  beforeEach(async () => {
     vi.useFakeTimers();
     vi.clearAllMocks();
+
+    // vitest 4.x ではテスト間でKVの状態が共有されるためクリアする
+    const historyKeys = await env.KV__HISTORY.list();
+    await Promise.all(
+      historyKeys.keys.map((key) => env.KV__HISTORY.delete(key.name)),
+    );
+    const scheduleKeys = await env.KV__SCHEDULES.list();
+    await Promise.all(
+      scheduleKeys.keys.map((key) => env.KV__SCHEDULES.delete(key.name)),
+    );
   });
 
   afterEach(() => {
