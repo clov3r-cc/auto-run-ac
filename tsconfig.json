@@ -15,10 +15,10 @@
       "./worker-configuration.d.ts",
       "@cloudflare/vitest-pool-workers"
     ],
-    // shadcn/ui cannot read baseUrl and paths from tsconfig.cloudflare.json
-    "baseUrl": ".",
+    // shadcn/ui requires paths to be defined in the root tsconfig.json
     "paths": {
-      "~/*": ["./app/*"]
+      "~/*": ["./app/*"],
+      "lib/*": ["./lib/*"]
     }
   }
 }
