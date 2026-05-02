@@ -1,4 +1,5 @@
 import { Result } from '@praha/byethrow';
+// eslint-disable-next-line import/no-unresolved
 import { env } from 'cloudflare:workers';
 import {
   formatDate,

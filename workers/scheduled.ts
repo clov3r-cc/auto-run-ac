@@ -112,8 +112,8 @@ export async function scheduledWorker({
 
   const foundSchedule = (await schedule(KV__SCHEDULES).get(jstNow)) ?? {
     arrivedHome: {
-      hour: DEFAULT_ARRIVED_HOME__HOUR as number,
-      minute: DEFAULT_ARRIVED_HOME__MINUTE as number,
+      hour: DEFAULT_ARRIVED_HOME__HOUR,
+      minute: DEFAULT_ARRIVED_HOME__MINUTE,
     },
     isDisabled: false,
   };
