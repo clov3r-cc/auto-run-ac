@@ -2,7 +2,7 @@ import { Buffer } from 'node:buffer';
 import { Result } from '@praha/byethrow';
 import { encode } from 'base64-arraybuffer';
 import type { Mode } from 'lib/domain/model.ts';
-import { z } from 'zod/v4';
+import { z } from 'zod';
 import { HttpError } from './error.ts';
 
 const SWITCHBOT_BASE_URL = 'https://api.switch-bot.com/v1.1/devices';

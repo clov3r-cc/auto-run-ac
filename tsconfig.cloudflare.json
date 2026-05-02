@@ -8,7 +8,6 @@
     "app/**/.client/**/*",
     "workers/**/*",
     "worker-configuration.d.ts",
-    "worker-configuration.test.d.ts",
     "lib/**/*"
   ],
   "compilerOptions": {

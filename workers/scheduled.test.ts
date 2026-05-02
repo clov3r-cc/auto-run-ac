@@ -1,6 +1,6 @@
 import { Result } from '@praha/byethrow';
 // eslint-disable-next-line import/no-unresolved
-import { env } from 'cloudflare:test';
+import { env } from 'cloudflare:workers';
 import {
   formatDate,
   formatDateWithKeyFormat,
@@ -54,8 +54,19 @@ describe('scheduledWorker', () => {
     );
   });
 
-  afterEach(() => {
+  afterEach(async () => {
     vi.useRealTimers();
+
+    await env.KV__HISTORY.list().then(async (listResult) =>
+      Promise.all(
+        listResult.keys.map(({ name }) => env.KV__HISTORY.delete(name)),
+      ),
+    );
+    await env.KV__SCHEDULES.list().then(async (listResult) =>
+      Promise.all(
+        listResult.keys.map(({ name }) => env.KV__SCHEDULES.delete(name)),
+      ),
+    );
   });
 
   it('should return early if history already exists for today', async () => {
