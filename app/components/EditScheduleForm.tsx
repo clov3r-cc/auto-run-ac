@@ -4,7 +4,7 @@ import { parseWithZod } from '@conform-to/zod/v4';
 import { format } from 'date-fns';
 import { ja } from 'date-fns/locale';
 import { ArrowLeft, RotateCcw, Save } from 'lucide-react';
-import { z } from 'zod/v4';
+import { z } from 'zod';
 
 import { Checkbox, FieldError, Select } from '~/components/form.tsx';
 import { Button } from '~/components/ui/button.tsx';
@@ -26,8 +26,8 @@ const editScheduleSchema = z.object({
       z
         .number()
         .int()
-        .min(12, { error: '帰宅時刻は12時以降である必要があります' })
-        .max(23, { error: '帰宅時刻は23時までである必要があります' }),
+        .min(12, { message: '帰宅時刻は12時以降である必要があります' })
+        .max(23, { message: '帰宅時刻は23時までである必要があります' }),
     ),
   arrivedHomeAtMinute: z
     .string({ error: '帰宅時刻は必須です' })

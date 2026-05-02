@@ -4,7 +4,7 @@ import { parseWithZod } from '@conform-to/zod/v4';
 import { addMonths, endOfMonth, startOfDay } from 'date-fns';
 import { schedule } from 'lib/kv/schedule.ts';
 import { jstDate } from 'lib/utils/date.ts';
-import { z } from 'zod/v4';
+import { z } from 'zod';
 import type { Route } from './+types/edit-schedule';
 import { MAX_MONTHS_AHEAD } from './dashboard.tsx';
 
