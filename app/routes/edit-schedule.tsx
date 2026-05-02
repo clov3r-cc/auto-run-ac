@@ -1,9 +1,10 @@
 import { href, redirect, useNavigate } from 'react-router';
-import { parseWithZod } from '@conform-to/zod';
+import type { SubmissionResult } from '@conform-to/react';
+import { parseWithZod } from '@conform-to/zod/v4';
 import { addMonths, endOfMonth, startOfDay } from 'date-fns';
 import { schedule } from 'lib/kv/schedule.ts';
 import { jstDate } from 'lib/utils/date.ts';
-import { z } from 'zod/v3';
+import { z } from 'zod';
 import type { Route } from './+types/edit-schedule';
 import { MAX_MONTHS_AHEAD } from './dashboard.tsx';
 
@@ -98,7 +99,9 @@ export async function action({
     },
   },
   request,
-}: Route.ActionArgs) {
+}: Route.ActionArgs): Promise<
+  Response | { lastResult: SubmissionResult<string[]> }
+> {
   const url = new URL(request.url);
   const dateParams = getDateParamsFromUrl(url);
 

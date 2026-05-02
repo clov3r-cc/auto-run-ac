@@ -1,10 +1,10 @@
 import { Form } from 'react-router';
 import { type SubmissionResult, useForm } from '@conform-to/react';
-import { parseWithZod } from '@conform-to/zod';
+import { parseWithZod } from '@conform-to/zod/v4';
 import { format } from 'date-fns';
 import { ja } from 'date-fns/locale';
 import { ArrowLeft, RotateCcw, Save } from 'lucide-react';
-import { z } from 'zod/v3';
+import { z } from 'zod';
 
 import { Checkbox, FieldError, Select } from '~/components/form.tsx';
 import { Button } from '~/components/ui/button.tsx';
