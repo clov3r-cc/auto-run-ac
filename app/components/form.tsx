@@ -100,7 +100,7 @@ export function Checkbox({
         {...props}
         ref={checkboxRef}
         checked={isChecked}
-        onCheckedChange={(checked) => control.change(checked)}
+        onCheckedChange={(checked) => control.change(checked === 'indeterminate' ? null : checked)}
         onBlur={() => control.blur()}
         className={`rounded focus:ring-2 focus:ring-stone-950 focus:ring-offset-2 ${className}`}
       />
