@@ -5,7 +5,7 @@ import {
   formatDateWithKeyFormat,
   KEY_SEPARATOR,
 } from 'lib/utils/date.ts';
-import { z } from 'zod/v4';
+import { z } from 'zod';
 
 const scheduleSchema = z.object({
   arrivedHome: z.object({
