@@ -4,7 +4,7 @@ import { parseWithZod } from '@conform-to/zod/v4';
 import { addMonths, endOfMonth, startOfDay } from 'date-fns';
 import { schedule } from 'lib/kv/schedule.ts';
 import { jstDate } from 'lib/utils/date.ts';
-import { z } from 'zod';
+import { z } from 'zod/v4';
 import type { Route } from './+types/edit-schedule';
 import { MAX_MONTHS_AHEAD } from './dashboard.tsx';
 
@@ -69,17 +69,17 @@ export async function loader({
 
 const editScheduleSchema = z.object({
   arrivedHomeAtHour: z
-    .string({ required_error: '帰宅時刻は必須です' })
+    .string({ error: '帰宅時刻は必須です' })
     .transform(Number)
     .pipe(
       z
         .number()
         .int()
-        .min(12, { message: '帰宅時刻は12時以降である必要があります' })
-        .max(23, { message: '帰宅時刻は23時までである必要があります' }),
+        .min(12, { error: '帰宅時刻は12時以降である必要があります' })
+        .max(23, { error: '帰宅時刻は23時までである必要があります' }),
     ),
   arrivedHomeAtMinute: z
-    .string({ required_error: '帰宅時刻は必須です' })
+    .string({ error: '帰宅時刻は必須です' })
     .transform(Number)
     .pipe(
       z
