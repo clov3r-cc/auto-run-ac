@@ -10,10 +10,10 @@ importers:
     dependencies:
       '@conform-to/react':
         specifier: ^1.19.1
-        version: 1.19.2(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+        version: 1.19.3(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       '@conform-to/zod':
         specifier: ^1.19.1
-        version: 1.19.2(zod@4.4.3)
+        version: 1.19.3(zod@4.4.3)
       '@date-fns/tz':
         specifier: ^1.4.1
         version: 1.4.1
@@ -350,17 +350,17 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@conform-to/dom@1.19.2':
-    resolution: {integrity: sha512-CzuY8tP2hp4K15NpvVRHn4O5LE8QVT6I5D3Cjns8/4JMJ8AnlUmswhj3O5dcPWA3vJcTJgNhI/4xDjd4bN4Pwg==}
+  '@conform-to/dom@1.19.3':
+    resolution: {integrity: sha512-ugNx4nMiSSEkIepo5rKxUW1I1Iab3ZFuRjNYw2b2zb7BSQJfDq4DwbywaAd55qS/8PVGp1n5G2O6orDHWPWWqA==}
 
-  '@conform-to/react@1.19.2':
-    resolution: {integrity: sha512-SCGunoi4pC/et0cxhV1H3BlzjerBufVGXSQrxA9qSFCBgAi7MKpRohOV3MhdMIY16T0TLdAShuib/CL8yqe+zw==}
+  '@conform-to/react@1.19.3':
+    resolution: {integrity: sha512-qIqvGzoVHQarRSH7r73yBQ3fLYdafhNQcItZt1dT7GK/VMB0A5eJ8fgylcY1zb5CEeZrvACC9zpmcLMqOD2nkA==}
     peerDependencies:
       react: '>=18'
       react-dom: '>=18'
 
-  '@conform-to/zod@1.19.2':
-    resolution: {integrity: sha512-+gHFXv/U54hWhH0fKWG1so+JY+XBrSUtdNueW1YZhcMJ2BqOuT5ieiWgXQtj+B2KCKsNCc48Gk7s4phNoNdEJQ==}
+  '@conform-to/zod@1.19.3':
+    resolution: {integrity: sha512-tlHywfz6W6bYnhmi8ajM1+ZLYjywLJVXteU4wvjc6QM0JT1g61cf4BaQqdDhKaAKl7DzqbZxi/riyMtz9HxyCQ==}
     peerDependencies:
       zod: ^3.21.0 || ^4.0.0
 
@@ -3877,17 +3877,17 @@ snapshots:
   '@cloudflare/workerd-windows-64@1.20260515.1':
     optional: true
 
-  '@conform-to/dom@1.19.2': {}
+  '@conform-to/dom@1.19.3': {}
 
-  '@conform-to/react@1.19.2(react-dom@19.2.6(react@19.2.6))(react@19.2.6)':
+  '@conform-to/react@1.19.3(react-dom@19.2.6(react@19.2.6))(react@19.2.6)':
     dependencies:
-      '@conform-to/dom': 1.19.2
+      '@conform-to/dom': 1.19.3
       react: 19.2.6
       react-dom: 19.2.6(react@19.2.6)
 
-  '@conform-to/zod@1.19.2(zod@4.4.3)':
+  '@conform-to/zod@1.19.3(zod@4.4.3)':
     dependencies:
-      '@conform-to/dom': 1.19.2
+      '@conform-to/dom': 1.19.3
       zod: 4.4.3
 
   '@cspotcode/source-map-support@0.8.1':
