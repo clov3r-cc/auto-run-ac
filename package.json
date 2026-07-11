@@ -13,7 +13,6 @@
     "deploy": "pnpm run build && wrangler deploy",
     "cf-typegen": "wrangler types",
     "preinstall": "npx -y only-allow pnpm; pnpm dlx typesync || :",
-    "postinstall": "pnpm run cf-typegen",
     "preview": "pnpm run build && vite preview",
     "test": "vitest run",
     "typecheck": "pnpm run cf-typegen && react-router typegen && tsc -b"
