@@ -47,8 +47,8 @@ pnpm run test       # Vitestによるテスト実行
 
 ```bash
 pnpm run cf-typegen # Cloudflare Workers型定義生成
-pnpm dlx wrangler versions upload   # プレビュー版のアップロード
-pnpm dlx wrangler versions deploy   # 本番へのデプロイ
+wrangler versions upload   # プレビュー版のアップロード
+wrangler versions deploy   # 本番へのデプロイ
 ```
 
 ## アーキテクチャ
