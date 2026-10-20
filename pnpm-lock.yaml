@@ -67,7 +67,7 @@ importers:
         version: 3.7.0
       ts-pattern:
         specifier: ^5.9.0
-        version: 5.9.0
+        version: 5.9.1
       vite:
         specifier: ^8.0.10
         version: 8.3.4(@types/node@24.19.2)(esbuild@0.28.1)(jiti@2.7.0)
@@ -3609,8 +3609,8 @@ packages:
     peerDependencies:
       typescript: '>=4.8.4'
 
-  ts-pattern@5.9.0:
-    resolution: {integrity: sha512-6s5V71mX8qBUmlgbrfL33xDUwO0fq48rxAu2LBE11WBeGdpCPOsXksQbZJHvHwhrd3QjUusd3mAOM5Gg0mFBLg==}
+  ts-pattern@5.9.1:
+    resolution: {integrity: sha512-HoMFgSPl87sKcGa5lIF4CZ46V2A1zFz1yduPZO8KtFv3es4G8C5/m1m4ypQQ6/gsj+242bYT3MITuvMeLzk/RA==}
 
   tsconfig-paths@3.15.0:
     resolution: {integrity: sha512-2Ac2RgzDe/cn48GvOe3M+o82pEFewD3UPbyoUHHdKasHwJKjds4fLXWf/Ux5kATBKN20oaFGu+jbElp1pos0mg==}
@@ -7195,7 +7195,7 @@ snapshots:
     dependencies:
       typescript: 6.0.3
 
-  ts-pattern@5.9.0: {}
+  ts-pattern@5.9.1: {}
 
   tsconfig-paths@3.15.0:
     dependencies:
