@@ -10,11 +10,7 @@
     "skipLibCheck": true,
     "strict": true,
     "noEmit": true,
-    "types": [
-      "node",
-      "./worker-configuration.d.ts",
-      "@cloudflare/vitest-pool-workers"
-    ],
+    "types": ["node", "./worker-configuration.d.ts"],
     // shadcn/ui requires paths to be defined in the root tsconfig.json
     "paths": {
       "~/*": ["./app/*"],
