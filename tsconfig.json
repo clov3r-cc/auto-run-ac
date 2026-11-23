@@ -13,7 +13,7 @@
     "types": [
       "node",
       "./worker-configuration.d.ts",
-      "@cloudflare/vitest-pool-workers"
+      "@cloudflare/vitest-plugin/types"
     ],
     // shadcn/ui requires paths to be defined in the root tsconfig.json
     "paths": {
